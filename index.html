@@ -94,25 +94,28 @@
 				//
 
 				material = new THREE.MeshPhysicalMaterial( {
-					// color: 0xccfffd,
-					// color: 0x000000,
 					envMap: texture,
-					// envMap: cubeCamera2.renderTarget.texture,
 					refractionRatio: 0.6,
 					reflectivity: 0.9,
-					// clearCoat: 0.1,
 					transparent: true,
 					opacity: 0.9,
 					roughness: 0.0,
-          metalness: 1.0
-					// specular: 0xffffff,
-					// shininess: 80
-					// blending: THREE.AdditiveBlending,
-					// depthWrite: false
-					// side: THREE.DoubleSide
+          metalness: 1.0,
+					// envMapIntensity: 5
+					side: THREE.FrontSide
 				} );
 
-				// material.envMap.mapping = THREE.SphericalRefractionMapping;
+				// material2 = new THREE.MeshPhysicalMaterial( {
+				// 	envMap: texture,
+				// 	refractionRatio: 0.6,
+				// 	reflectivity: 0.9,
+				// 	transparent: true,
+				// 	opacity: 0.9,
+				// 	roughness: 0.0,
+				// 	metalness: .0,
+				// 	// envMapIntensity: 5
+				// 	side: THREE.BackSide
+				// } );
 
 				sphere = new THREE.Mesh( new THREE.IcosahedronBufferGeometry( 20, 3 ), material );
 				sphere.renderDepth = -1.1;
