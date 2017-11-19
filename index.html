@@ -51,7 +51,7 @@
 
 				// texture.mapping = THREE.UVMapping;
 
-				texture.mapping = THREE.SphericalRefractionMapping;
+				texture.mapping = THREE.EquirectangularReflectionMapping;
 
 				init( texture );
 				animate();
@@ -79,12 +79,14 @@
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
-				cubeCamera1 = new THREE.CubeCamera( 1, 1000, 256 );
+				cubeCamera1 = new THREE.CubeCamera( 1, 1000, 512 );
 				// cubeCamera1.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
+				cubeCamera1.renderTarget.texture.mapping = THREE.CubeRefractionMapping;
 				scene.add( cubeCamera1 );
 
-				cubeCamera2 = new THREE.CubeCamera( 1, 1000, 256 );
+				cubeCamera2 = new THREE.CubeCamera( 1, 1000, 512 );
 				// cubeCamera2.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
+				cubeCamera2.renderTarget.texture.mapping = THREE.CubeRefractionMapping;
 				scene.add( cubeCamera2 );
 
 				document.body.appendChild( renderer.domElement );
@@ -93,16 +95,18 @@
 
 				material = new THREE.MeshPhysicalMaterial( {
 					// color: 0xccfffd,
-					color: 0xffffff,
-					envMap: textureLoader,
+					// color: 0x000000,
+					envMap: texture,
 					// envMap: cubeCamera2.renderTarget.texture,
 					refractionRatio: 0.6,
-					// reflectivity: 0.9,
-					clearCoat: 0.5,
+					reflectivity: 0.9,
+					// clearCoat: 0.1,
 					transparent: true,
 					opacity: 0.9,
+					roughness: 0.0,
+          metalness: 1.0
 					// specular: 0xffffff,
-					// shininess: 80,
+					// shininess: 80
 					// blending: THREE.AdditiveBlending,
 					// depthWrite: false
 					// side: THREE.DoubleSide
